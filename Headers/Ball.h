@@ -4,9 +4,10 @@
 namespace jm {
 	class Ball {
 	public:
-		vec2 pos =vec2(0.0f, 2.0f);
-		vec2 vel = vec2(0.5f, 0.5f);
+		vec2 pos =vec2(0.0f, -0.3f);
+		vec2 vel = vec2(-1.0f, -2.0f);
 		float radius = 0.01f;
+		float time = 0.0f;
 		const float coef_res = 1.0f; // 반발계수 
 
 		void draw() {

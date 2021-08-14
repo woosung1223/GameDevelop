@@ -25,9 +25,6 @@
     <ClInclude Include="Headers\BouncingBall.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Colors.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\DrawFunctions.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -50,6 +47,12 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Vector3.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Colors.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
