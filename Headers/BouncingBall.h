@@ -20,15 +20,14 @@ namespace jm
 		ImageObject background;
 		Mainpage* mpg = nullptr;
 		Bar* bar = nullptr;
-		vector<Ball*> ball;
-		BlockManager* blockmanager = nullptr;
-		RandomNumberGenerator RN;
-		bool itemmaked = false;
-		float dt = 0.0f;
-		int clock = 0;
-		bool timerStarted = false;
+
+		BlockHandler* blockhandler = nullptr;
+		BallHandler* ballhandler = nullptr;
 		Item* itemtype[2] = { new Faster(), new Multiply() };
 		Item* item = nullptr;
+		float dt = 0.0f;
+		bool gameover = false;
+
 		BouncingBall()
 			: Game2D("Bouncing Ball", 500, 960, false) // MUST initialize Game2D
 		{
@@ -36,8 +35,10 @@ namespace jm
 			background.init("images/Background_img_2.jpg");
 			mpg = new Mainpage;
 			bar = new Bar;
-			ball.push_back(new Ball);
-			blockmanager = new BlockManager;
+			blockhandler = new BlockHandler;
+			ballhandler = new BallHandler;
+			ballhandler->PushBall();
+			ballhandler->PushBall();
 		}
 
 		void update() override
@@ -62,6 +63,23 @@ namespace jm
 					break;
 				}
 			}
+			else if (gameover) {
+				ImageObject gameoverimg;
+				ImageObject sentence;
+				gameoverimg.init("images/gameover.png", 0, 0, 0);
+				sentence.init("images/pressbutton.png", 0, 0, 0);
+				beginTransformation();
+				translate(0.0f, 0.5f);
+				scale(0.3f, 0.3f);
+				gameoverimg.draw();
+				endTransformation();
+
+				beginTransformation();
+				translate(0.0f, 0.15f);
+				scale(0.1f, 0.1f);
+				sentence.draw();
+				endTransformation();
+			}
 			// game start
 			else {
 				bar->draw();
@@ -69,17 +87,17 @@ namespace jm
 				if (isKeyPressed(GLFW_KEY_D))  bar->update(getTimeStep());
 
 				// ball
-				for (Ball*& i : ball) {
-					i->draw();
-					i->update(getTimeStep() * 0.1f);
-					i->CheckCollision(*bar);
+				ballhandler->draw();
+				ballhandler->update(getTimeStep() * 0.1f);
+				ballhandler->PopBall(); // 삭제될 ball이 있는지 검사 
+				ballhandler->CheckCollision(*bar);
+				if (ballhandler->GameOver()) {
+					// gameover
+					gameover = true;
 				}
-
 				// block
-				for (Ball*& i : ball)
-					blockmanager->CheckCollision(*i);
-				blockmanager->draw();
-
+				blockhandler->CheckCollision(*ballhandler);
+				blockhandler->draw();
 
 				//make item(random)
 				// item

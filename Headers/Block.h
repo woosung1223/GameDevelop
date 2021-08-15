@@ -1,7 +1,7 @@
 #pragma once
 #include "Game2D.h"
 #include "RandomNumberGenerator.h"
-#include "Ball.h"
+#include "ball.h"
 #include <vector>
 #define EPSILON 0.000001
 namespace jm {
@@ -56,11 +56,11 @@ namespace jm {
 		}
 	};
 
-	class BlockManager {
+	class BlockHandler {
 	public:
 		vector <Block*> Blocks;
 		const float coef_res = 1.0f;
-		BlockManager() {
+		BlockHandler() {
 			/*
 				34 * 30 크기의 블록들을 생성.
 			*/
@@ -85,89 +85,94 @@ namespace jm {
 			}
 		}
 
-		void CheckCollision(Ball& ball) {
+		void CheckCollision(BallHandler& ballhandler) {
 			for (auto& block : Blocks) {
 				if (block != nullptr && !block->deleting) { // 삭제된 블록이 아니거나 삭제될 예정인 블록이 아닌 경우에만 
-					vec2 left[2] = { vec2(block->pos.x - 0.02f, block->pos.y - 0.015f), vec2(block->pos.x - 0.015f, block->pos.y + 0.015f) };
-					vec2 right[2] = { vec2(block->pos.x + 0.015f, block->pos.y - 0.015f),vec2(block->pos.x + 0.02f, block->pos.y + 0.015f)};
-					vec2 down[2] = { vec2(block->pos.x - 0.015f, block->pos.y - 0.02f), vec2(block->pos.x + 0.015f, block->pos.y - 0.015f)};
-					vec2 up[2] = { vec2(block->pos.x - 0.015f, block->pos.y + 0.015f), vec2(block->pos.x + 0.015f, block->pos.y + 0.02f)};
-					vec2 inside[2] = { vec2(block->pos.x - 0.0075f, block->pos.y - 0.0075f), vec2(block->pos.x + 0.0075f, block->pos.y + 0.0075f) };
-					// boundary check를 위한 space 생성
+					for (auto& ball : ballhandler.balls) {
+						if (ball != nullptr) {
+							vec2 left[2] = { vec2(block->pos.x - 0.02f, block->pos.y - 0.015f), vec2(block->pos.x - 0.015f, block->pos.y + 0.015f) };
+							vec2 right[2] = { vec2(block->pos.x + 0.015f, block->pos.y - 0.015f),vec2(block->pos.x + 0.02f, block->pos.y + 0.015f) };
+							vec2 down[2] = { vec2(block->pos.x - 0.015f, block->pos.y - 0.02f), vec2(block->pos.x + 0.015f, block->pos.y - 0.015f) };
+							vec2 up[2] = { vec2(block->pos.x - 0.015f, block->pos.y + 0.015f), vec2(block->pos.x + 0.015f, block->pos.y + 0.02f) };
+							vec2 inside[2] = { vec2(block->pos.x - 0.0075f, block->pos.y - 0.0075f), vec2(block->pos.x + 0.0075f, block->pos.y + 0.0075f) };
+							// boundary check를 위한 space 생성
 
-					// 모서리방향 4방향 부딪혔을 때 -> 블록 안에 들어왔는지.
-					// 왼쪽 벽
-					if (ball.pos + vec2(ball.radius, 0.0f) >= left[0] && ball.pos + vec2(ball.radius, 0.0f) <= left[1]) {
-						block->life -= 1;
+							// 모서리방향 4방향 부딪혔을 때 -> 블록 안에 들어왔는지.
+							// 왼쪽 벽
 
-						std::cout << "left" << std::endl;
-						if (ball.vel.x >= 0.0f)
-							ball.vel.x *= -1.0f * coef_res;
-					}
+							if (ball->pos + vec2(ball->radius, 0.0f) >= left[0] && ball->pos + vec2(ball->radius, 0.0f) <= left[1]) {
+								block->life -= 1;
 
-					// 오른쪽 벽
-					else if (ball.pos - vec2(ball.radius, 0.0f) >= right[0] && ball.pos - vec2(ball.radius, 0.0f) <= right[1]) {
-						block->life -= 1;
+								std::cout << "left" << std::endl;
+								if (ball->vel.x >= 0.0f)
+									ball->vel.x *= -1.0f * coef_res;
+							}
 
-						std::cout << "right" << std::endl;
-						if (ball.vel.x <= 0.0f)
-							ball.vel.x *= -1.0f * coef_res;
-					}
+							// 오른쪽 벽
+							else if (ball->pos - vec2(ball->radius, 0.0f) >= right[0] && ball->pos - vec2(ball->radius, 0.0f) <= right[1]) {
+								block->life -= 1;
 
-					// 아래쪽 벽
-					else if (ball.pos + vec2(0.0f, ball.radius) >= down[0] && ball.pos + vec2(0.0f, ball.radius) <= down[1]) {
-						block->life -= 1;
+								std::cout << "right" << std::endl;
+								if (ball->vel.x <= 0.0f)
+									ball->vel.x *= -1.0f * coef_res;
+							}
 
-						std::cout << "down" << std::endl;
-						if (ball.vel.y >= 0.0f)
-							ball.vel.y *= -1.0f * coef_res;
-					}
+							// 아래쪽 벽
+							else if (ball->pos + vec2(0.0f, ball->radius) >= down[0] && ball->pos + vec2(0.0f, ball->radius) <= down[1]) {
+								block->life -= 1;
 
-					// 위쪽 벽
-					else if (ball.pos - vec2(0.0f, ball.radius) >= up[0] && ball.pos - vec2(0.0f, ball.radius) <= up[1]) {
-						block->life -= 1;
+								std::cout << "down" << std::endl;
+								if (ball->vel.y >= 0.0f)
+									ball->vel.y *= -1.0f * coef_res;
+							}
 
-						std::cout << "up" << std::endl;
-						if (ball.vel.y <= 0.0f)
-							ball.vel.y *= -1.0f * coef_res;
-					}
+							// 위쪽 벽
+							else if (ball->pos - vec2(0.0f, ball->radius) >= up[0] && ball->pos - vec2(0.0f, ball->radius) <= up[1]) {
+								block->life -= 1;
 
-					// 우측 상단 모서리
-					else if (ball.pos - vec2(ball.radius, ball.radius) >= inside[0] && ball.pos - vec2(ball.radius, ball.radius) <= inside[1]) {
-						block->life -= 1;
+								std::cout << "up" << std::endl;
+								if (ball->vel.y <= 0.0f)
+									ball->vel.y *= -1.0f * coef_res;
+							}
 
-						ball.pos += vec2(ball.radius, ball.radius);
-						std::cout << "right up" << std::endl;
-						if (ball.vel.x<= 0.0f)
-							ball.vel *= -1.0f * coef_res;
-					}
-					// 좌측 상단 모서리
-					else if (ball.pos + vec2(ball.radius, -ball.radius) >= inside[0] && ball.pos + vec2(ball.radius, -ball.radius) <= inside[1]) {
-						block->life -= 1;
+							// 우측 상단 모서리
+							else if (ball->pos - vec2(ball->radius, ball->radius) >= inside[0] && ball->pos - vec2(ball->radius, ball->radius) <= inside[1]) {
+								block->life -= 1;
 
-						ball.pos += vec2(-ball.radius, ball.radius);
-						std::cout << "left up" << std::endl;
-						if (ball.vel.x >= 0.0f)
-							ball.vel *= -1.0f * coef_res;
-					}
+								ball->pos += vec2(ball->radius, ball->radius);
+								std::cout << "right up" << std::endl;
+								if (ball->vel.x <= 0.0f)
+									ball->vel *= -1.0f * coef_res;
+							}
+							// 좌측 상단 모서리
+							else if (ball->pos + vec2(ball->radius, -ball->radius) >= inside[0] && ball->pos + vec2(ball->radius, -ball->radius) <= inside[1]) {
+								block->life -= 1;
 
-					// 우측 하단 모서리
-					else if (ball.pos + vec2(-ball.radius, ball.radius) >= inside[0] && ball.pos + vec2(-ball.radius, ball.radius) <= inside[1]) {
-						block->life -= 1;
+								ball->pos += vec2(-ball->radius, ball->radius);
+								std::cout << "left up" << std::endl;
+								if (ball->vel.x >= 0.0f)
+									ball->vel *= -1.0f * coef_res;
+							}
 
-						ball.pos += vec2(ball.radius, -ball.radius);
-						std::cout << "right down" << std::endl;
-						if (ball.vel.x <= 0.0f)
-							ball.vel *= -1.0f * coef_res;
-					}
-					// 좌측 하단 모서리
-					else if (ball.pos + vec2(ball.radius, ball.radius) >= inside[0] && ball.pos + vec2(ball.radius, ball.radius) <= inside[1]) {
-						block->life -= 1;
+							// 우측 하단 모서리
+							else if (ball->pos + vec2(-ball->radius, ball->radius) >= inside[0] && ball->pos + vec2(-ball->radius, ball->radius) <= inside[1]) {
+								block->life -= 1;
 
-						ball.pos += vec2(-ball.radius, -ball.radius);
-						std::cout << "left down" << std::endl;
-						if (ball.vel.x >= 0.0f)
-							ball.vel *= -1.0f * coef_res;
+								ball->pos += vec2(ball->radius, -ball->radius);
+								std::cout << "right down" << std::endl;
+								if (ball->vel.x <= 0.0f)
+									ball->vel *= -1.0f * coef_res;
+							}
+							// 좌측 하단 모서리
+							else if (ball->pos + vec2(ball->radius, ball->radius) >= inside[0] && ball->pos + vec2(ball->radius, ball->radius) <= inside[1]) {
+								block->life -= 1;
+
+								ball->pos += vec2(-ball->radius, -ball->radius);
+								std::cout << "left down" << std::endl;
+								if (ball->vel.x >= 0.0f)
+									ball->vel *= -1.0f * coef_res;
+							}
+						}
 					}
 				}
 			}
