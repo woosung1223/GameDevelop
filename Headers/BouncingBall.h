@@ -20,7 +20,7 @@ namespace jm
 		ImageObject background;
 		Mainpage* mpg = nullptr;
 		Bar* bar = nullptr;
-
+		int count = 0;
 		BlockHandler* blockhandler = nullptr;
 		BallHandler* ballhandler = nullptr;
 		Item* itemtype[2] = { new Faster(), new Multiply() };
@@ -39,10 +39,16 @@ namespace jm
 			ballhandler = new BallHandler;
 			ballhandler->PushBall();
 			ballhandler->PushBall();
+			ballhandler->PushBall();
+			ballhandler->PushBall();
+			ballhandler->PushBall();
 		}
-
+		~BouncingBall() {
+			std::cout << count << std::endl;
+		}
 		void update() override
 		{
+			count++;
 			// draw background
 			beginTransformation();
 			scale(1.5f, 2.0f);

@@ -5,7 +5,7 @@
 namespace jm {
 	class Ball {
 	public:
-		vec2 pos =vec2(0.0f, -0.3f);
+		vec2 pos =vec2(0.0f, 1.0f);
 		vec2 vel = vec2(-1.0f, -2.0f);
 		float radius = 0.01f;
 

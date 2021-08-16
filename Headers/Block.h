@@ -103,7 +103,6 @@ namespace jm {
 							if (ball->pos + vec2(ball->radius, 0.0f) >= left[0] && ball->pos + vec2(ball->radius, 0.0f) <= left[1]) {
 								block->life -= 1;
 
-								std::cout << "left" << std::endl;
 								if (ball->vel.x >= 0.0f)
 									ball->vel.x *= -1.0f * coef_res;
 							}
@@ -112,7 +111,6 @@ namespace jm {
 							else if (ball->pos - vec2(ball->radius, 0.0f) >= right[0] && ball->pos - vec2(ball->radius, 0.0f) <= right[1]) {
 								block->life -= 1;
 
-								std::cout << "right" << std::endl;
 								if (ball->vel.x <= 0.0f)
 									ball->vel.x *= -1.0f * coef_res;
 							}
@@ -121,7 +119,6 @@ namespace jm {
 							else if (ball->pos + vec2(0.0f, ball->radius) >= down[0] && ball->pos + vec2(0.0f, ball->radius) <= down[1]) {
 								block->life -= 1;
 
-								std::cout << "down" << std::endl;
 								if (ball->vel.y >= 0.0f)
 									ball->vel.y *= -1.0f * coef_res;
 							}
@@ -130,7 +127,6 @@ namespace jm {
 							else if (ball->pos - vec2(0.0f, ball->radius) >= up[0] && ball->pos - vec2(0.0f, ball->radius) <= up[1]) {
 								block->life -= 1;
 
-								std::cout << "up" << std::endl;
 								if (ball->vel.y <= 0.0f)
 									ball->vel.y *= -1.0f * coef_res;
 							}
@@ -140,7 +136,6 @@ namespace jm {
 								block->life -= 1;
 
 								ball->pos += vec2(ball->radius, ball->radius);
-								std::cout << "right up" << std::endl;
 								if (ball->vel.x <= 0.0f)
 									ball->vel *= -1.0f * coef_res;
 							}
@@ -149,7 +144,6 @@ namespace jm {
 								block->life -= 1;
 
 								ball->pos += vec2(-ball->radius, ball->radius);
-								std::cout << "left up" << std::endl;
 								if (ball->vel.x >= 0.0f)
 									ball->vel *= -1.0f * coef_res;
 							}
@@ -159,7 +153,6 @@ namespace jm {
 								block->life -= 1;
 
 								ball->pos += vec2(ball->radius, -ball->radius);
-								std::cout << "right down" << std::endl;
 								if (ball->vel.x <= 0.0f)
 									ball->vel *= -1.0f * coef_res;
 							}
@@ -168,7 +161,6 @@ namespace jm {
 								block->life -= 1;
 
 								ball->pos += vec2(-ball->radius, -ball->radius);
-								std::cout << "left down" << std::endl;
 								if (ball->vel.x >= 0.0f)
 									ball->vel *= -1.0f * coef_res;
 							}
