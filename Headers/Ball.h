@@ -33,6 +33,7 @@ namespace jm {
 		// balls[0]은 main Ball. multiply 는 balls[0]를 기준으로 진행.
 		vector <Ball*> balls;
 		RandomNumberGenerator RN;
+		int ballnum = 0;
 		const float coef_res = 1.0f; // 반발계수 
 
 		BallHandler() {
@@ -40,6 +41,7 @@ namespace jm {
 			// 100개의 공까지 할당 가능
 		}
 		void PushBall() {
+			ballnum++;
 			int startidx = balls.size();
 			balls.push_back(new Ball);
 			
@@ -61,7 +63,7 @@ namespace jm {
 			}
 		}
 		bool GameOver() {
-			// 게임이 끝났는지. 공이 전부 없어졌으면 게임오버
+			// 게임이 끝났는지, 공이 전부 없어졌으면 게임오버
 			for (auto& i : balls) {
 				if (i != nullptr) return false;
 			}
@@ -87,14 +89,14 @@ namespace jm {
 				if (i != nullptr) {
 					if (i->pos.y < barup - 0.01f)
 						continue;
-					if (i->pos.x >= barleft && i->pos.x <= barright && i->pos.y <= barup) // 바와 충돌
+					else if (i->pos.x >= barleft && i->pos.x <= barright && i->pos.y <= barup) // 바와 충돌
 					{
 						i->pos.y = barup + i->radius;
 
 						if (i->vel.y <= 0.0f)
 							i->vel.y *= -1.0f * coef_res;
 					}
-					if (i->pos.y >= 1.0f) // 위쪽 벽과 충돌
+					else if (i->pos.y >= 1.0f) // 위쪽 벽과 충돌
 					{
 						i->pos.y = 1.0f - i->radius;
 
@@ -102,7 +104,7 @@ namespace jm {
 							i->vel.y *= -1.0f * coef_res;
 					}
 
-					if (i->pos.x >= 0.515f) // 오른쪽 벽과 충돌
+					else if (i->pos.x >= 0.515f) // 오른쪽 벽과 충돌
 					{
 						i->pos.x = 0.515f - i->radius;
 
@@ -110,7 +112,7 @@ namespace jm {
 							i->vel.x *= -1.0f * coef_res;
 					}
 
-					if (i->pos.x <= -0.515f) // 왼쪽 벽과 충돌
+					else if (i->pos.x <= -0.515f) // 왼쪽 벽과 충돌
 					{
 						i->pos.x = -0.515f + i->radius;
 

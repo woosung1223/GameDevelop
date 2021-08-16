@@ -66,7 +66,7 @@ namespace jm {
 			*/
 			for (int i = 0; i < 34; i++) { // 세로
 				for (int j = 0; j < 30; j++) // 가로
-						Blocks.push_back(new Block(-0.5f + 0.03 * i, 0.0f + 0.03f * j));
+					Blocks.push_back(new Block(-0.5f + 0.03 * i, 0.0f + 0.03f * j));
 			}
 		}
 		void draw() {
@@ -89,7 +89,7 @@ namespace jm {
 			for (auto& block : Blocks) {
 				if (block != nullptr && !block->deleting) { // 삭제된 블록이 아니거나 삭제될 예정인 블록이 아닌 경우에만 
 					for (auto& ball : ballhandler.balls) {
-						if (ball != nullptr) {
+						if (ball != nullptr && (block->pos - ball->pos).getMagnitude() < 0.1f) {
 							vec2 left[2] = { vec2(block->pos.x - 0.02f, block->pos.y - 0.015f), vec2(block->pos.x - 0.015f, block->pos.y + 0.015f) };
 							vec2 right[2] = { vec2(block->pos.x + 0.015f, block->pos.y - 0.015f),vec2(block->pos.x + 0.02f, block->pos.y + 0.015f) };
 							vec2 down[2] = { vec2(block->pos.x - 0.015f, block->pos.y - 0.02f), vec2(block->pos.x + 0.015f, block->pos.y - 0.015f) };
