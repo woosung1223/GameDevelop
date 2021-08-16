@@ -38,10 +38,6 @@ namespace jm
 			blockhandler = new BlockHandler;
 			ballhandler = new BallHandler;
 			ballhandler->PushBall();
-			ballhandler->PushBall();
-			ballhandler->PushBall();
-			ballhandler->PushBall();
-			ballhandler->PushBall();
 		}
 		~BouncingBall() {
 			std::cout << count << std::endl;
