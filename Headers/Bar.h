@@ -6,12 +6,13 @@ namespace jm {
 	class Bar {
 	public:
 		vec2 pos = vec2{ 0.0f, -0.8f };
-
+		float width = 0.1f;
+		float height = 0.02f;
 		void draw() {
 			beginTransformation();
 			translate(pos);
-			drawFilledBox(Colors::gold, 0.1f, 0.02f);
-			drawWiredBox(Colors::white, 0.1f, 0.02f);
+			drawFilledBox(RGB(242, 226, 198), width, height);
+			drawWiredBox(Colors::white, width, height);
 			endTransformation();
 		}
 
