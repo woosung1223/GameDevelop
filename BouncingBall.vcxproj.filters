@@ -11,6 +11,9 @@
     <ClCompile Include="Engine\ImageObject.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Headers\SoundEngine.cpp">
+      <Filter>Headers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Ball.h">
@@ -49,11 +52,14 @@
     <ClInclude Include="Engine\Vector3.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Colors.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Item.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\SoundEngine.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

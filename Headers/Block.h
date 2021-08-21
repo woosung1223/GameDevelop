@@ -79,6 +79,12 @@ namespace jm {
 			*/
 			BlockHandler::LoadMap(Blocks);
 		}
+		bool AllBlockDeleted() {
+			bool tf = true;
+			for (const auto& i : Blocks)
+				if (i != nullptr && !i ->rigid) tf = false;
+			return tf;
+		}
 		void draw() {
 			for (auto& i : Blocks) {
 				if (i != nullptr) {
@@ -100,17 +106,16 @@ namespace jm {
 				{
 					Block* blk = new Block(-0.5f + 0.03 * i, 0.0f + 0.03f * j);
 					//랜덤으로 회색블록 생성
-					int RandomNumber_j = RN.getInt(0, 29);
-					int RandomNumber_i = RN.getInt(0, 33); // 더 많은 블록 생성 
-					if (j == RandomNumber_j || i == RandomNumber_i)
-						blk->rigid = true;
-
-					//// 내가 만든 맵
-					//if (i == 0 || i == 33 || j == 0 && (i > 20 || i < 14) ||
-					//	(i == 13 || i == 21) && j <= 13)
+					//int RandomNumber_j = RN.getInt(-3, 27);
+					//int RandomNumber_i = RN.getInt(0, 33); // 더 많은 블록 생성 
+					//if (j == RandomNumber_j || i == RandomNumber_i)
 					//	blk->rigid = true;
-
-					blocks.push_back(blk);
+					
+					// 내가 만든 맵
+					if (i == 0 || i == 29 || ((j == -3 || j == 27) && i % 2 == 0))
+						blk->rigid = true;
+					if(i < 30)
+						blocks.push_back(blk);
 				}
 			}
 		}

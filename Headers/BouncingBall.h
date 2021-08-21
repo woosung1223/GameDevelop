@@ -7,6 +7,7 @@
 #include "Block.h"
 #include "Item.h"
 #include "RandomNumberGenerator.h"
+#include "SoundEngine.h"
 #include <vector>
 #define EXIT 2
 #define START 1
@@ -35,6 +36,9 @@ namespace jm
 		BouncingBall()
 			: Game2D("Bouncing Ball", 500, 960, false) // MUST initialize Game2D
 		{
+			SoundEngine_Singleton& sound_engine = *SoundEngine_Singleton::getInstance();
+			sound_engine.createSound("background.mp3", "background_music", true);
+			sound_engine.playSound("background_music");
 			//background.init("images/Background_img.png");
 			background.init("images/Background_img_3.jpg");
 			mpg = new Mainpage;
@@ -72,7 +76,7 @@ namespace jm
 					break;
 				}
 			}
-			else if (gameover && !type3_activated) {
+			else if (gameover && !type3_activated) { // 공을 다 놓쳐서 끝난 경우. laser 아이템을 먹었으면 예외.
 					ImageObject gameoverimg;
 					ImageObject sentence;
 					gameoverimg.init("images/gameover.png", 0, 0, 0);
@@ -88,7 +92,15 @@ namespace jm
 					scale(0.1f, 0.1f);
 					sentence.draw();
 					endTransformation();
-				
+			}
+			else if (blockhandler->AllBlockDeleted()) { // 블록이 다 부서져서 게임이 끝난 경우
+				ImageObject gameoverimg;
+				gameoverimg.init("images/gameover2.png", 0, 0, 0);
+				beginTransformation();
+				translate(0.0f, 0.4f);
+				scale(0.6f, 0.6f);
+				gameoverimg.draw();
+				endTransformation();
 			}
 			// game start
 			else {
@@ -125,8 +137,8 @@ namespace jm
 
 				//make item(random)
 				// item
-				if (item == nullptr && timeForItem >= 5.0f) { 
-					// 40.0f 가 넘어가면 아이템이 젠됨. 
+				if (item == nullptr && timeForItem >= 20.0f) { 
+					// 10.0f 가 넘어가면 아이템이 젠됨. 
 					item = itemhandler->GetItem(); 
 					timeForItem = 0.0f;
 				}
