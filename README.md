@@ -6,7 +6,8 @@ c++와 자료구조를 배운 시점에서 내가 할 수 있는 사이드 프�
 목표는 무언가 결과물을 도출함과 동시에 그 과정에서 객체지향을 정확히 이해하는 것. 실질적인 개발이 처음이기에 결과보다는 과정에 의미를 두고 싶었다.
 
 #### 사용한 라이브러리
-OpenGL과 사운드 엔진을 위한 FMOD를 사용했다. 
+OpenGL, FMOD
 
 #### 게임 플레이 화면 
-![image](https://user-images.githubusercontent.com/78679830/130315959-600c5f99-f387-4607-ab1f-aae27f03de64.png){: width="100" height="100"}
+![github](https://user-images.githubusercontent.com/78679830/130322863-2bb8a3d2-ee81-4da9-96b6-ccd64595af2a.PNG)
+
