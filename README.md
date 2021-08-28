@@ -29,3 +29,5 @@
 * 키보드 입력 상호작용
 * 인터페이스
 
+#### 디자인 패턴
+<img src = "https://user-images.githubusercontent.com/78679830/131209324-282fa628-b5f9-450e-b37d-27fcaebe735b.PNG">
