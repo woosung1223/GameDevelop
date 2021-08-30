@@ -30,4 +30,7 @@
 * 인터페이스
 
 #### 디자인 패턴
-<img src = "https://user-images.githubusercontent.com/78679830/131209324-282fa628-b5f9-450e-b37d-27fcaebe735b.PNG">
+<img src = "https://user-images.githubusercontent.com/78679830/131291189-dc1ab423-a865-48dd-8719-b6c4647664e2.PNG">
+
+> 사운드 엔진은 SINGLETON 패턴을 사용하였음.
+
