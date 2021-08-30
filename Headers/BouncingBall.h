@@ -193,7 +193,7 @@ namespace jm
 					if(PointerImage == nullptr)
 						PointerImage = item->ImageForLaser();
 
-					if (isKeyPressedAndReleased(GLFW_KEY_SPACE)) {
+					if (isKeyPressedAndReleased(GLFW_KEY_SPACE)&& count_for_pointer == 0) {
 						dt_for_Laser = 0.0f;
 						count_for_pointer = 1;
 					}
