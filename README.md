@@ -10,9 +10,11 @@
 
 
 #### 게임 플레이 화면 
-<img src = "https://user-images.githubusercontent.com/78679830/131140869-f64d43d5-f209-402c-8c7e-0d6ead574d2f.PNG" width = "30%" height = "30%"> <img src = "https://user-images.githubusercontent.com/78679830/131141316-eef9dbba-1a84-4f07-8794-9d1946a551a9.PNG" width = "30%" height = "30%"> <img src = "https://user-images.githubusercontent.com/78679830/131141160-f67ed3a0-afe3-4a40-96af-7598fb4c176c.PNG" width = "30%" height = "30%">
+<img src = "https://user-images.githubusercontent.com/78679830/131140869-f64d43d5-f209-402c-8c7e-0d6ead574d2f.PNG" width = "20%" height = "20%"> <img src = "https://user-images.githubusercontent.com/78679830/131141316-eef9dbba-1a84-4f07-8794-9d1946a551a9.PNG" width = "20%" height = "20%"> <img src = "https://user-images.githubusercontent.com/78679830/131141160-f67ed3a0-afe3-4a40-96af-7598fb4c176c.PNG" width = "20%" height = "15%"> <img src = "https://user-images.githubusercontent.com/78679830/131292045-f5fa1dd1-2a6d-44cd-a2ce-73c95bdd5582.PNG" width = "20%" height = "20%">
+
  
-                게임 시작화면                        게임 플레이화면                          게임 종료화면
+         게임 시작화면            게임 플레이화면            게임 종료화면(실패)
+      게임 종료화면(클리어)
                 
 > 크게는 게임 페이지를 세 분류로 나눴다. 게임 시작화면에서 start 버튼을 누르면 게임 플레이화면으로 이동하고, exit 버튼을 누르면 게임이 종료된다.
 > 
@@ -34,3 +36,5 @@
 
 > 사운드 엔진은 SINGLETON 패턴을 사용하였음.
 
+#### 실행 순서도(flow chart)
+![flowchart](https://user-images.githubusercontent.com/78679830/131296750-4c3ad1b6-911d-454e-83f7-da3e2ac335ab.PNG)
